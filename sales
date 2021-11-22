@@ -3,7 +3,12 @@
 #include <string>
 using namespace std;
 
- 
+
+class Sale{
+
+}
+
+
 
 int main () {
 vector <string> f1le;
@@ -23,7 +28,10 @@ vector <string> f1le;
   else cout << "Unable to open file"; 
 
  void puchase(string productName, int quant, string client){}
+voud updateSpecSale(int quant, string service)
+{
 
+}
 
 vector annualSales(){
 cout<<f1le<<endl;
