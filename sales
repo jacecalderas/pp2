@@ -8,7 +8,7 @@ using namespace std;
 int main () {
 vector <string> f1le;
   string line;
-  ifstream myfile ("example.txt");
+  ifstream myfile ("example.txt");    //reads file in as input and saves as a vector 
   if (myfile.is_open())
   {
     while ( getline (myfile,line) )
@@ -22,7 +22,12 @@ vector <string> f1le;
 
   else cout << "Unable to open file"; 
 
- 
+ void puchase(string productName, int quant, string client){}
 
+
+vector annualSales(){
+cout<<f1le<<endl;
+return f1le;
+}
   return 0;
 }
