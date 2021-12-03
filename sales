@@ -9,25 +9,29 @@ Write your code in this editor and press "Run" button to compile and execute it.
 #include <fstream>
 #include <string>
 #include <vector>
+#include <sstream>
 using namespace std;
 
 
 class Sale
 {
 private:
-  int quantity;			//stores number of items for each sale
+  string quantity;			//stores number of items for each sale
   double price;			//price of items
   string service;		//item/service purchased
   string client;		// client who is buying
   string salesmen;		//
-
+  int saleNum;
 public:
-    Sale (int q, string s, string c, string sp)	//constructor for new sale items.
+int numSales;
+    Sale (string q, string s, string c, string sp)	//constructor for new sale items.
   {
     quantity = q;
     service = s;
     client = c;
     salesmen = sp;
+    numSales+=1;
+    saleNum=numSales;
   }
 
   string getSale ()
@@ -37,14 +41,21 @@ public:
     temp += "\nService: ";
     temp += service;
     temp += "\nQuantity: ";
-    temp += to_string (quantity);
+    temp += quantity;
     temp += "\nSeller: ";
     temp += salesmen;
-    temp += "\n";
+   // temp += "\n";
+   // temp+="sale number: ";
+  //temp+=to_string(saleNum);
+    temp+="\n\n";
+    
 
     return temp;
   }
-
+    int getSaleNum()
+    {
+        return saleNum;
+    }
   string getClient ()
   {
     return client;
@@ -58,9 +69,13 @@ public:
   {
     return service;
   }
-  int getQuant ()
+  string getQuant ()
   {
     return quantity;
+  }
+  void setNumSales(int n)
+  {
+      numSales=n;
   }
 //void puchase(string productName, int quant, string client){
 
@@ -69,7 +84,7 @@ public:
   {
     price = p;
   }
-  void updateSpecSale (int quant, string s, string c, string l)	//
+  void updateSpecSale (string quant, string s, string c, string l)	//
   {
     quantity = quant;
     service = s;
@@ -85,7 +100,8 @@ public:
 int
 main ()
 {
-  int q;
+  string q;
+  int ns;
   int choice;			//chooses what action to perform
   int cl1ent;			//chooses what specific client is needed for certain functions
   int saleIn;			//acts as the location of a certain sale of a certain client
@@ -95,15 +111,49 @@ main ()
   cin >> choice;		//pick a number:0 to print all sales, 1 to print all sales from a specific client, 2 to print a specific sale, 3 to update a sale, 4 to add a sale, -1 to end process
   string p, c, s;
   vector < vector < Sale >> allSales;
+  // Sale useless("0","0","0","0");
+  fstream myfile;
+ myfile.open("sales.txt",ios::in);
+if(myfile.is_open())
+{
+    string l1,l2,l3,l4,l5,l6,l7,l8;
+    while(getline(myfile,l1)&&getline(myfile,l2)&&getline(myfile,l3)&&getline(myfile,l4)&&getline(myfile,l5)&&getline(myfile,l6)&&getline(myfile,l6)&&getline(myfile,l7))
+    {
+        l2.erase(0,8);
+        c=l2;
+        l3.erase(0,9);
+        p=l3;
+        l4.erase(0,10);
+        q=l4;
+        l5.erase(0,8);
+        s=l5;
+        
+       std:: stringstream geek;
 
-  ofstream myfile;
-  myfile.open ("sales.txt");
+//useless.setNumSales(ns);
+ geek<<l6;
+    
+    cl1ent= 0;
+    geek >> cl1ent;
+        
+ 
+  
+  
+    while(cl1ent>=allSales.size())
+    {
+        vector<Sale> v;
+     allSales.push_back(v);   
+    }
+    Sale sa(q,p,c,s);
+    allSales.at(cl1ent).push_back(sa);
+    }
+    }
+    myfile.close();
 
   while (choice != -1)
     {
 
-//cin>>q>>p>>c>>s;
-      //  cout<<"Hello World";
+
       if (choice == 0)
 	{
 	  for (int i = 0; i < allSales.size (); ++i)
@@ -123,8 +173,7 @@ main ()
 	      vector < Sale > z;
 	      allSales.push_back (z);
 	    }
-	  cout << "All sales for " << allSales.at (cl1ent).at (0).
-	    getClient () << endl;
+	  cout << "All sales for " << cl1ent << endl;
 	  for (int i = 0; i < allSales.at (cl1ent).size (); ++i)
 	    {
 	      cout << allSales.at (cl1ent).at (i).getSale ();
@@ -156,29 +205,8 @@ main ()
 	      vector < Sale > z;
 	      allSales.push_back (z);
 	    }
-	  string find, line;
 	  allSales.at (cl1ent).at (saleIn).updateSpecSale (q, p, c, s);
-	  cout << "name of the sale you want to update " << endl;
-	  cin >> find;
-
-
-	  ifstream myfile2;	//for reading records
-	  myfile2.open ("sales.txt");
-
-	  ofstream temp;
-	  temp.open ("temp.txt");
-	  while (getline (myfile2, line))
-	    {
-	      if (line != find)
-		temp << line << endl;
-	    }
-	  myfile2.close ();
-	  temp.close ();
-	  remove ("sales.txt");
-	  rename ("temp.txt", "sales.txt");
-
-	  myfile << allSales.at (cl1ent).at (saleIn).getSale ();
-
+	  
 	}
       else if (choice == 4)
 	{
@@ -192,8 +220,13 @@ main ()
 	    }
 	  Sale sa (q, p, c, s);
 	  allSales.at (cl1ent).push_back (sa);
-	  myfile << sa.getSale ();
-
+	 
+	  myfile.open ("sales.txt", ios::app);
+	  if (myfile.is_open ())
+	    {
+	      myfile << sa.getSale ()<<"\n"<<cl1ent<<endl;
+	      myfile.close ();
+	    }
 	}
       cout << "Decide which Action to take:\n";
       cout <<
@@ -201,7 +234,20 @@ main ()
 
       cin >> choice;
     }
-
+if(choice=-1)
+{
+    myfile.open("sales.txt",ios::out);
+    if(myfile.is_open())
+    {
+        for (int i = 0; i < allSales.size (); ++i)
+	    {
+	      for (int j = 0; j < allSales.at (i).size (); ++j)
+		myfile << allSales.at (i).at (j).getSale ();
+	    }
+        
+    }
+    
+}
 //cout<< s.getSale();
 
 //s.updateSpecSale(q,p,c,s);
