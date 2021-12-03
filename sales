@@ -12,208 +12,200 @@ Write your code in this editor and press "Run" button to compile and execute it.
 using namespace std;
 
 
-class Sale{
+class Sale
+{
 private:
-int quantity;//stores number of items for each sale
-double price;//price of items
-string service;//item/service purchased
-string client;// client who is buying
-string salesmen;//
+  int quantity;			//stores number of items for each sale
+  double price;			//price of items
+  string service;		//item/service purchased
+  string client;		// client who is buying
+  string salesmen;		//
 
 public:
-Sale(int q, string s, string c, string sp)//constructor for new sale items.
-{
-quantity=q;
-service=s;
-client=c;
-salesmen=sp;
-}
+    Sale (int q, string s, string c, string sp)	//constructor for new sale items.
+  {
+    quantity = q;
+    service = s;
+    client = c;
+    salesmen = sp;
+  }
 
-string getSale()
-{string temp="Sale Info:\nClient: ";
-temp+=client;
-temp+="\nService: ";
-temp+=service;
-temp+="\nQuantity: ";
-temp+=to_string(quantity);
-temp+="\nSeller: ";
-temp+=salesmen;
-temp+="\n";
+  string getSale ()
+  {
+    string temp = "Sale Info:\nClient: ";
+    temp += client;
+    temp += "\nService: ";
+    temp += service;
+    temp += "\nQuantity: ";
+    temp += to_string (quantity);
+    temp += "\nSeller: ";
+    temp += salesmen;
+    temp += "\n";
 
-return temp;
-}
+    return temp;
+  }
 
-string getClient()
-{
+  string getClient ()
+  {
     return client;
-    
-}
-string getSeller()
-{
+
+  }
+  string getSeller ()
+  {
     return salesmen;
-}
-string getService()
-{
+  }
+  string getService ()
+  {
     return service;
-}
-int getQuant()
-{
+  }
+  int getQuant ()
+  {
     return quantity;
-}
+  }
 //void puchase(string productName, int quant, string client){
 
 //}
-void setPrice(double p)
-{
-price=p;
-}
-void updateSpecSale(int quant, string s, string c,string l)//
-{
-quantity=quant;
-service=s;
-client=c;
-salesmen=l;
-}
+  void setPrice (double p)
+  {
+    price = p;
+  }
+  void updateSpecSale (int quant, string s, string c, string l)	//
+  {
+    quantity = quant;
+    service = s;
+    client = c;
+    salesmen = l;
+  }
 
 };
 
 
-//int main () {
-/* vector <string> f1le;
-  string line;
-  ifstream myfile ("example.txt");    //reads file in as input and saves as a vector 
-  if (myfile.is_open())
-  {
-    while ( getline (myfile,line) )
+
+
+int
+main ()
+{
+  int q;
+  int choice;			//chooses what action to perform
+  int cl1ent;			//chooses what specific client is needed for certain functions
+  int saleIn;			//acts as the location of a certain sale of a certain client
+  cout << "Decide which Action to take:\n";
+  cout <<
+    "0 to print all sales, 1 to print all sales from a specific client, 2 to print a specific sale, 3 to update a sale, 4 to add a sale, -1 to end process\n";
+  cin >> choice;		//pick a number:0 to print all sales, 1 to print all sales from a specific client, 2 to print a specific sale, 3 to update a sale, 4 to add a sale, -1 to end process
+  string p, c, s;
+  vector < vector < Sale >> allSales;
+
+  ofstream myfile;
+  myfile.open ("sales.txt");
+
+  while (choice != -1)
     {
-      f1le.push_back(line) ;
-    }
-    myfile.close();
-
-  }
-
- 
-
-  else cout << "Unable to open file"; 
-
- 
-
-vector annualSales(){
-cout<<f1le<<endl;
-return f1le;
-} */
-  
- // Sale t= new Sale(1,"2","3","4"); 
-  
-  
- // return 0;
-//}
-
-int main()
-{ int q;
-int choice;//chooses what action to perform
-int cl1ent;//chooses what specific client is needed for certain functions
-int saleIn;//acts as the location of a certain sale of a certain client
-cout<<"Decide which Action to take:\n";
-cout<<"0 to print all sales, 1 to print all sales from a specific client, 2 to print a specific sale, 3 to update a sale, 4 to add a sale, -1 to end process\n";
-cin>>choice;//pick a number:0 to print all sales, 1 to print all sales from a specific client, 2 to print a specific sale, 3 to update a sale, 4 to add a sale, -1 to end process
-string p,c,s;
-vector<vector<Sale>> allSales;
- 
- ofstream myfile;
-    myfile.open("sales.txt");
-    
-while (choice!=-1){
 
 //cin>>q>>p>>c>>s;
-  //  cout<<"Hello World";
-  if(choice==0)
-  {
-      for(int i=0;i<allSales.size();++i)
-      {
-          for(int j=0;j<allSales.at(i).size();++j)
-          cout<<allSales.at(i).at(j).getSale();
-      }
-      
-  }
-    else if(choice==1)
-     {  cout<<"Pick a client index\n";
-         cin>>cl1ent;
-        // if(cl1ent>=allSales.size())
-         while(cl1ent>=allSales.size())
-         {      vector<Sale> z;
-            allSales.push_back(z);
-         }
-         cout<<"All sales for "<<allSales.at(cl1ent).at(0).getClient()<<endl;
-        for(int i=0;i<allSales.at(cl1ent).size();++i)
-        {
-           cout<< allSales.at(cl1ent).at(i).getSale();
-        }
-     }
-    else if(choice==2)
-     {
-         cout<<"enter a client index then a sale index in that order\n";
-         cin>>cl1ent>>saleIn;
-          while(cl1ent>=allSales.size())
-         {      vector<Sale> z;
-            allSales.push_back(z);
-         }
-        cout<< allSales.at(cl1ent).at(saleIn).getSale();
-     }
-     else if(choice==3)
-     {  cout<<"enter a client index, sale index, quantity, product/service, client, and salesmen in that order\n";
-         cin>>cl1ent>>saleIn>>q>>p>>c>>s;
-          while(cl1ent>=allSales.size())
-         {      vector<Sale> z;
-            allSales.push_back(z);
-         }
-         string find;
-         allSales.at(cl1ent).at(saleIn).updateSpecSale(q,p,c,s);
-         cout<<"name of the sale you want to update "<<endl;
-            cin>>find; 
-            
+      //  cout<<"Hello World";
+      if (choice == 0)
+	{
+	  for (int i = 0; i < allSales.size (); ++i)
+	    {
+	      for (int j = 0; j < allSales.at (i).size (); ++j)
+		cout << allSales.at (i).at (j).getSale ();
+	    }
 
-    ifstream myfile2; //for reading records
-   myfile2.open("sales.txt");
+	}
+      else if (choice == 1)
+	{
+	  cout << "Pick a client index\n";
+	  cin >> cl1ent;
+	  // if(cl1ent>=allSales.size())
+	  while (cl1ent >= allSales.size ())
+	    {
+	      vector < Sale > z;
+	      allSales.push_back (z);
+	    }
+	  cout << "All sales for " << allSales.at (cl1ent).at (0).
+	    getClient () << endl;
+	  for (int i = 0; i < allSales.at (cl1ent).size (); ++i)
+	    {
+	      cout << allSales.at (cl1ent).at (i).getSale ();
+	    }
+	}
+      else if (choice == 2)
+	{
+	  cout << "enter a client index then a sale index in that order\n";
+	  cin >> cl1ent >> saleIn;
+	  while (cl1ent >= allSales.size ())
+	    {
+	      vector < Sale > z;
+	      allSales.push_back (z);
+	    }
+	  cout << allSales.at (cl1ent).at (saleIn).getSale ();
+	}
+      else if (choice == 3)
+	{
+	  cout <<
+	    "enter a client index, sale index, quantity, product/service, client, and salesmen in that order\n";
+	  cin >> cl1ent >> saleIn >> q >> p >> c >> s;
+	  while (saleIn >= allSales.at (cl1ent).size ())
+	    {
+	      cout << "enter a valid sale index\n";
+	      cin >> saleIn;
+	    }
+	  while (cl1ent >= allSales.size ())
+	    {
+	      vector < Sale > z;
+	      allSales.push_back (z);
+	    }
+	  string find, line;
+	  allSales.at (cl1ent).at (saleIn).updateSpecSale (q, p, c, s);
+	  cout << "name of the sale you want to update " << endl;
+	  cin >> find;
 
-    ofstream temp;
-    temp.open("temp.txt");
-    while (getline(myfile2, line))
-    {
-      if (line != find)
-        temp << line << endl;
+
+	  ifstream myfile2;	//for reading records
+	  myfile2.open ("sales.txt");
+
+	  ofstream temp;
+	  temp.open ("temp.txt");
+	  while (getline (myfile2, line))
+	    {
+	      if (line != find)
+		temp << line << endl;
+	    }
+	  myfile2.close ();
+	  temp.close ();
+	  remove ("sales.txt");
+	  rename ("temp.txt", "sales.txt");
+
+	  myfile << allSales.at (cl1ent).at (saleIn).getSale ();
+
+	}
+      else if (choice == 4)
+	{
+	  cout <<
+	    "enter a client index, quantity, product/service, client, and salesmen in that order\n";
+	  cin >> cl1ent >> q >> p >> c >> s;	//picks cl1ent index, and variables needed for sale objects
+	  while (cl1ent >= allSales.size ())
+	    {
+	      vector < Sale > z;
+	      allSales.push_back (z);
+	    }
+	  Sale sa (q, p, c, s);
+	  allSales.at (cl1ent).push_back (sa);
+	  myfile << sa.getSale ();
+
+	}
+      cout << "Decide which Action to take:\n";
+      cout <<
+	"0 to print all sales, 1 to print all sales from a specific client, 2 to print a specific sale, 3 to update a sale, 4 to add a sale, -1 to end process\n";
+
+      cin >> choice;
     }
-    myfile2.close();
-    temp.close();
-    remove("sales.txt");
-    rename("temp.txt", "sales.txt");
-    
-            myfile<<allSales.at(cl1ent).at(saleIn).getSale();
-            
-     }
-     else if(choice==4)
-     {cout<<"enter a client index, quantity, product/service, client, and salesmen in that order\n";
-     cin>>cl1ent>>q>>p>>c>>s;//picks cl1ent index, and variables needed for sale objects
-      while(cl1ent>=allSales.size())
-         {      vector<Sale> z;
-            allSales.push_back(z);
-         }
-      Sale sa(q,p,c,s);
-      allSales.at(cl1ent).push_back(sa);
-      myfile<<sa.getSale();
-      
-     }
-     cout<<"Decide which Action to take:\n";
-cout<<"0 to print all sales, 1 to print all sales from a specific client, 2 to print a specific sale, 3 to update a sale, 4 to add a sale, -1 to end process\n";
-
-     cin>>choice;
-}
 
 //cout<< s.getSale();
 
 //s.updateSpecSale(q,p,c,s);
 //cout<<s.getSale();
-   
-    return 0;
-}
 
+  return 0;
+}
