@@ -118,6 +118,7 @@ if(myfile.is_open())
 {
     string l1,l2,l3,l4,l5,l6,l7,l8;
     while(getline(myfile,l1)&&getline(myfile,l2)&&getline(myfile,l3)&&getline(myfile,l4)&&getline(myfile,l5)&&getline(myfile,l6)&&getline(myfile,l6)&&getline(myfile,l7))
+    
     {
         l2.erase(0,8);
         c=l2;
@@ -242,7 +243,7 @@ if(choice=-1)
         for (int i = 0; i < allSales.size (); ++i)
 	    {
 	      for (int j = 0; j < allSales.at (i).size (); ++j)
-		myfile << allSales.at (i).at (j).getSale ();
+		myfile << allSales.at (i).at (j).getSale ()<<"\n"<<i;
 	    }
         
     }
