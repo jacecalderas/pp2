@@ -97,10 +97,9 @@ int numSales;
 
 
 
-int
-main ()
-{
-  string q;
+
+
+ /* string q;
   int ns;
   int choice;			//chooses what action to perform
   int cl1ent;			//chooses what specific client is needed for certain functions
@@ -255,4 +254,4 @@ if(choice=-1)
 //cout<<s.getSale();
 
   return 0;
-}
+*/
