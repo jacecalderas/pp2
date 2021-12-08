@@ -15,6 +15,162 @@ using std::endl; using std::string;
 
 int main()
 {
+  string q;
+  int ns;
+  int choice;			//chooses what action to perform
+  int cl1ent;			//chooses what specific client is needed for certain functions
+  int saleIn;			//acts as the location of a certain sale of a certain client
+  cout << "Decide which Action to take:\n";
+  cout <<
+    "0 to print all sales, 1 to print all sales from a specific client, 2 to print a specific sale, 3 to update a sale, 4 to add a sale, -1 to end process\n";
+  cin >> choice;		//pick a number:0 to print all sales, 1 to print all sales from a specific client, 2 to print a specific sale, 3 to update a sale, 4 to add a sale, -1 to end process
+  string p, c, s;
+  vector < vector < Sale >> allSales;
+  // Sale useless("0","0","0","0");
+  fstream myfile;
+ myfile.open("sales.txt",ios::in);
+if(myfile.is_open())
+{
+    string l1,l2,l3,l4,l5,l6,l7,l8;
+    while(getline(myfile,l1)&&getline(myfile,l2)&&getline(myfile,l3)&&getline(myfile,l4)&&getline(myfile,l5)&&getline(myfile,l6)&&getline(myfile,l6)&&getline(myfile,l7))
+    
+    {
+        l2.erase(0,8);
+        c=l2;
+        l3.erase(0,9);
+        p=l3;
+        l4.erase(0,10);
+        q=l4;
+        l5.erase(0,8);
+        s=l5;
+        
+       std:: stringstream geek;
+
+//useless.setNumSales(ns);
+ geek<<l6;
+    
+    cl1ent= 0;
+    geek >> cl1ent;
+        
+ 
+  
+  
+    while(cl1ent>=allSales.size())
+    {
+        vector<Sale> v;
+     allSales.push_back(v);   
+    }
+    Sale sa(q,p,c,s);
+    allSales.at(cl1ent).push_back(sa);
+    }
+    }
+    myfile.close();
+
+  while (choice != -1)
+    {
+
+
+      if (choice == 0)
+	{
+	  for (int i = 0; i < allSales.size (); ++i)
+	    {
+	      for (int j = 0; j < allSales.at (i).size (); ++j)
+		cout << allSales.at (i).at (j).getSale ();
+	    }
+
+	}
+      else if (choice == 1)
+	{
+	  cout << "Pick a client index\n";
+	  cin >> cl1ent;
+	  // if(cl1ent>=allSales.size())
+	  while (cl1ent >= allSales.size ())
+	    {
+	      vector < Sale > z;
+	      allSales.push_back (z);
+	    }
+	  cout << "All sales for " << cl1ent << endl;
+	  for (int i = 0; i < allSales.at (cl1ent).size (); ++i)
+	    {
+	      cout << allSales.at (cl1ent).at (i).getSale ();
+	    }
+	}
+      else if (choice == 2)
+	{
+	  cout << "enter a client index then a sale index in that order\n";
+	  cin >> cl1ent >> saleIn;
+	  while (cl1ent >= allSales.size ())
+	    {
+	      vector < Sale > z;
+	      allSales.push_back (z);
+	    }
+	  cout << allSales.at (cl1ent).at (saleIn).getSale ();
+	}
+      else if (choice == 3)
+	{
+	  cout <<
+	    "enter a client index, sale index, quantity, product/service, client, and salesmen in that order\n";
+	  cin >> cl1ent >> saleIn >> q >> p >> c >> s;
+	  while (saleIn >= allSales.at (cl1ent).size ())
+	    {
+	      cout << "enter a valid sale index\n";
+	      cin >> saleIn;
+	    }
+	  while (cl1ent >= allSales.size ())
+	    {
+	      vector < Sale > z;
+	      allSales.push_back (z);
+	    }
+	  allSales.at (cl1ent).at (saleIn).updateSpecSale (q, p, c, s);
+	  
+	}
+      else if (choice == 4)
+	{
+	  cout <<
+	    "enter a client index, quantity, product/service, client, and salesmen in that order\n";
+	  cin >> cl1ent >> q >> p >> c >> s;	//picks cl1ent index, and variables needed for sale objects
+	  while (cl1ent >= allSales.size ())
+	    {
+	      vector < Sale > z;
+	      allSales.push_back (z);
+	    }
+	  Sale sa (q, p, c, s);
+	  allSales.at (cl1ent).push_back (sa);
+	 
+	  myfile.open ("sales.txt", ios::app);
+	  if (myfile.is_open ())
+	    {
+	      myfile << sa.getSale ()<<"\n"<<cl1ent<<endl;
+	      myfile.close ();
+	    }
+	}
+      cout << "Decide which Action to take:\n";
+      cout <<
+	"0 to print all sales, 1 to print all sales from a specific client, 2 to print a specific sale, 3 to update a sale, 4 to add a sale, -1 to end process\n";
+
+      cin >> choice;
+    }
+if(choice=-1)
+{
+    myfile.open("sales.txt",ios::out);
+    if(myfile.is_open())
+    {
+        for (int i = 0; i < allSales.size (); ++i)
+	    {
+	      for (int j = 0; j < allSales.at (i).size (); ++j)
+		myfile << allSales.at (i).at (j).getSale ()<<"\n"<<i;
+	    }
+        
+    }
+    
+}
+//cout<< s.getSale();
+
+//s.updateSpecSale(q,p,c,s);
+//cout<<s.getSale();
+
+  return 0;
+
          string line;
  std::ifstream myfile ("tmp.txt");
   if (myfile.is_open())
