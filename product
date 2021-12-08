@@ -1,0 +1,70 @@
+#include<iostream>
+#include<fstream>
+#include <string>
+#include <sstream>
+#include<vector>
+
+ 
+
+using namespace std;
+
+ 
+
+void writeFile();
+void readFile(ifstream &inputFile);
+
+ 
+
+int main()
+{
+    writeFile();
+    ifstream inputFile;
+    
+    inputFile.open("Product/Services.txt");
+
+ 
+
+    if (!inputFile) 
+    {
+        cout << "Unable to open file";
+    }
+
+ 
+
+    else 
+    {
+
+ 
+
+    readFile(inputFile);//arguments
+
+ 
+
+    inputFile.close();
+     }
+
+ 
+
+return 0;
+}
+
+ 
+
+void writeFile()
+{
+    ofstream outputFile;
+    string filename;
+    cout<<"Jan:$200\nFeb:$235\nMar:$220\nApr:$210\nMay:$200\nJun:$260\nJul:$245\nAug:$300\nSep:$200\nOct:$278\nNov:$267\nDec:$295";
+    cin>>filename;
+    cout<<"File created!";
+    outputFile.close();
+}
+void readFile(ifstream &inputFile)//parameters
+
+ 
+
+{
+
+ 
+
+}
