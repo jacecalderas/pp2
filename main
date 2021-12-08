@@ -1,9 +1,9 @@
-#include <iostream>
-#include <fstream>
-#include <iostream>
-#include <fstream>
+#include<iostream>
+#include<fstream>
 #include <string>
+#include <sstream>
 #include "Sale.cpp"
+#include <vector>
 using std::cout; using std::fstream;
 using std::endl; using std::string;
 
@@ -232,7 +232,15 @@ if(choice=-1)
 
  
 
- 
+ std::ifstream myfile ("tmp.txt");
+  if (myfile.is_open())
+  {
+    while ( getline (myfile,line) )
+    {
+      cout << line << '\n';
+    }
+    myfile.close();
+  }
 
  
 
@@ -240,4 +248,125 @@ if(choice=-1)
 
  
 
+    string filename("tmp.txt");
+    fstream file_out;
+
+ 
+
+ 
+
+ 
+
+    file_out.open(filename, std::ios_base::out);
+    if (!file_out.is_open()) {
+        cout << "failed to open " << filename << '\n';
+    } else {
+        cout << "Input client name" << endl;     //Gets client name and outputs it to the text file
+        string clientName;
+        cin >> clientName;
+        file_out << "Client: " << clientName << endl;
+        
+        cout << "Input client address" << endl;   //Gets client address and outputs it to the text file
+        string clientAddress;
+        cin >> clientAddress;   //Use "_" instead of spaces when typing the full address
+        file_out << "Client Address: " << clientAddress << endl;
+        
+        cout << "Input client order" << endl;   //Gets client order and outputs it to the text file
+        string clientOrder;
+        cin >> clientOrder;
+        file_out << "Order: " << clientOrder << " pencils" << endl;
+
+ 
+void writeFile();
+void readFile(ifstream &inputFile);
+ 
+
+ 
+
+    }
+
+ 
+
+ 
+
+ 
+
+    return EXIT_SUCCESS;
+
+ 
+
+ 
+void writeFile();
+void readFile(ifstream &inputFile);
+ 
+   writeFile();
+    ifstream inputFile;
+    
+    inputFile.open("Product/Services.txt");
+ 
+    if (!inputFile) 
+    {
+        cout << "Unable to open file";
+    }
+ 
+    else 
+    {
+ 
+    readFile(inputFile);//arguments
+ 
+    inputFile.close();
+     }
+     
+     writeFile();
+    ifstream inputFile;
+    
+    inputFile.open("Product/Services.txt");
+ 
+    if (!inputFile) 
+    {
+        cout << "Unable to open file";
+    }
+ 
+    else 
+    {
+ 
+    readFile(inputFile);//arguments
+ 
+    inputFile.close();
+     }
+ 
+return 0;
 }
+ 
+
+ 
+void writeFile()
+{
+    ofstream outputFile;
+    string filename;
+    cout<<"Jan:$200\nFeb:$235\nMar:$220\nApr:$210\nMay:$200\nJun:$260\nJul:$245\nAug:$300\nSep:$200\nOct:$278\nNov:$267\nDec:$295";
+    cin>>filename;
+    cout<<"File created!";
+    outputFile.close();
+}
+void readFile(ifstream &inputFile)//parameters
+ 
+{
+ 
+}
+void writeF1le()
+{
+    ofstream outputFile;
+    string filename;
+    cout<<"Pencil pack $1 Sold 135 /nSharpener pack $1 Sold 115";
+    cin>>filename;
+    cout<<"File created!";
+    outputFile.close();
+}
+void readFile(ifstream &inputFile)//parameters
+ 
+{
+ 
+}
+
+
