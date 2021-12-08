@@ -162,18 +162,18 @@ if(choice=-1)
 	    }
         
     }
-    
-}
+    //return 0;
+
 //cout<< s.getSale();
 
 //s.updateSpecSale(q,p,c,s);
 //cout<<s.getSale();
 
-  return 0;
+  
 
          string line;
  std::ifstream myfile ("tmp.txt");
-  if (myfile.is_open())
+  if(myfile.is_open())
   {
     while ( getline (myfile,line) )
     {
@@ -228,18 +228,18 @@ if(choice=-1)
 
  
 
-    return EXIT_SUCCESS;
+  //  return EXIT_SUCCESS;
 
  
 
- std::ifstream myfile ("tmp.txt");
-  if (myfile.is_open())
+ std::ifstream myf1le ("temp.txt");
+  if (myf1le.is_open())
   {
-    while ( getline (myfile,line) )
+    while ( getline (myf1le,line) )
     {
       cout << line << '\n';
     }
-    myfile.close();
+    myf1le.close();
   }
 
  
@@ -248,8 +248,8 @@ if(choice=-1)
 
  
 
-    string filename("tmp.txt");
-    fstream file_out;
+    string f1lename("temp.txt");
+    fstream f1le_out;
 
  
 
@@ -257,24 +257,24 @@ if(choice=-1)
 
  
 
-    file_out.open(filename, std::ios_base::out);
-    if (!file_out.is_open()) {
-        cout << "failed to open " << filename << '\n';
+    f1le_out.open(f1lename, std::ios_base::out);
+    if (!f1le_out.is_open()) {
+        cout << "failed to open " << f1lename << '\n';
     } else {
         cout << "Input client name" << endl;     //Gets client name and outputs it to the text file
         string clientName;
         cin >> clientName;
-        file_out << "Client: " << clientName << endl;
+        f1le_out << "Client: " << clientName << endl;
         
         cout << "Input client address" << endl;   //Gets client address and outputs it to the text file
         string clientAddress;
         cin >> clientAddress;   //Use "_" instead of spaces when typing the full address
-        file_out << "Client Address: " << clientAddress << endl;
+        f1le_out << "Client Address: " << clientAddress << endl;
         
         cout << "Input client order" << endl;   //Gets client order and outputs it to the text file
         string clientOrder;
         cin >> clientOrder;
-        file_out << "Order: " << clientOrder << " pencils" << endl;
+        f1le_out << "Order: " << clientOrder << " pencils" << endl;
 
  
 void writeFile();
@@ -291,7 +291,7 @@ void readFile(ifstream &inputFile);
 
  
 
-    return EXIT_SUCCESS;
+   // return EXIT_SUCCESS;
 
  
 
@@ -318,11 +318,11 @@ void readFile(ifstream &inputFile);
      }
      
      writeFile();
-    ifstream inputFile;
+    ifstream inpuFile;
     
     inputFile.open("Product/Services.txt");
  
-    if (!inputFile) 
+    if (!inpuFile) 
     {
         cout << "Unable to open file";
     }
@@ -330,14 +330,15 @@ void readFile(ifstream &inputFile);
     else 
     {
  
-    readFile(inputFile);//arguments
+    readFile(inpuFile);//arguments
  
-    inputFile.close();
+    inpuFile.close();
      }
  
+
+}
 return 0;
 }
- 
 
  
 void writeFile()
@@ -363,10 +364,6 @@ void writeF1le()
     cout<<"File created!";
     outputFile.close();
 }
-void readFile(ifstream &inputFile)//parameters
- 
-{
- 
-}
+
 
 
